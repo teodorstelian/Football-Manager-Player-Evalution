@@ -1,2 +1,2 @@
-INPUT_FILE = "htmls/Team.html"
-OUTPUT_FILE = "htmls/Results.html"
+INPUT_FILE = "input/Team.html"
+OUTPUT_FILE = "output/Results.html"

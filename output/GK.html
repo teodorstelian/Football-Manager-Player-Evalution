@@ -1,0 +1,146 @@
+
+    <html>
+    <header>
+        <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    </header>
+    <body>
+    <table border="1" class="dataframe" id="table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Height</th>
+      <th>Nat</th>
+      <th>2nd Nat</th>
+      <th>Transfer Value</th>
+      <th>gk</th>
+      <th>Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Int</td>
+      <td>Davide Peri</td>
+      <td>16</td>
+      <td>GK</td>
+      <td>1,84 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€2K - €140K</td>
+      <td>10.8</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.97</td>
+    </tr>
+    <tr>
+      <td>Yth</td>
+      <td>Matteo Campo</td>
+      <td>16</td>
+      <td>GK</td>
+      <td>1,85 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€6K - €60K</td>
+      <td>8.5</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Yth</td>
+      <td>Vittorio Brogi</td>
+      <td>18</td>
+      <td>GK</td>
+      <td>1,88 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€0 - €1,5K</td>
+      <td>6.5</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Yth</td>
+      <td>Nicolas Antonelli</td>
+      <td>17</td>
+      <td>GK</td>
+      <td>1,79 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€0 - €4K</td>
+      <td>6.7</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Yth</td>
+      <td>Angelo Comes</td>
+      <td>17</td>
+      <td>GK</td>
+      <td>1,80 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€0</td>
+      <td>7.2</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Yth</td>
+      <td>Lorenzo Mura</td>
+      <td>17</td>
+      <td>GK</td>
+      <td>1,88 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€2K - €3,5K</td>
+      <td>7.1</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Ramon Virano</td>
+      <td>20</td>
+      <td>GK</td>
+      <td>1,83 m</td>
+      <td>ITA</td>
+      <td></td>
+      <td>€16K - €60K</td>
+      <td>10.5</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable({
+                paging: false,
+                order: [[12, 'desc']],
+                // scrollY: 400,
+            });
+        });
+    </script>
+    </body>
+    </html>
+    
