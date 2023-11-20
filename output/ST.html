@@ -17,7 +17,7 @@
       <th>Transfer Value</th>
       <th>st_pf</th>
       <th>st_af</th>
-      <th>Apps</th>
+      <th>Total_Apps</th>
       <th>Gls</th>
       <th>Ast</th>
       <th>Av Rat</th>
@@ -51,7 +51,7 @@
       <td>€6K - €60K</td>
       <td>10.5</td>
       <td>11.6</td>
-      <td>24 (4)</td>
+      <td>28</td>
       <td>9</td>
       <td>5</td>
       <td>6.87</td>
@@ -67,7 +67,7 @@
       <td>€7K - €55K</td>
       <td>10.1</td>
       <td>10.9</td>
-      <td>22 (2)</td>
+      <td>24</td>
       <td>4</td>
       <td>6</td>
       <td>6.71</td>
@@ -99,7 +99,7 @@
       <td>€26K - €100K</td>
       <td>9.9</td>
       <td>10.7</td>
-      <td>10 (2)</td>
+      <td>12</td>
       <td>9</td>
       <td>1</td>
       <td>7.35</td>
@@ -115,7 +115,7 @@
       <td>€9K - €50K</td>
       <td>10.0</td>
       <td>10.7</td>
-      <td>6 (11)</td>
+      <td>17</td>
       <td>4</td>
       <td>1</td>
       <td>6.81</td>
@@ -131,7 +131,7 @@
       <td>€12K - €120K</td>
       <td>9.1</td>
       <td>10.8</td>
-      <td>0 (5)</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
       <td>6.45</td>
@@ -147,7 +147,7 @@
       <td>€0 - €50K</td>
       <td>8.5</td>
       <td>9.5</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -163,7 +163,7 @@
       <td>€0 - €35K</td>
       <td>7.1</td>
       <td>7.6</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -179,7 +179,7 @@
       <td>€45K - €95K</td>
       <td>8.9</td>
       <td>9.4</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -195,7 +195,7 @@
       <td>€14K - €130K</td>
       <td>8.5</td>
       <td>9.5</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -211,7 +211,7 @@
       <td>€8K - €30K</td>
       <td>9.0</td>
       <td>10.4</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -227,7 +227,7 @@
       <td>€0 - €120K</td>
       <td>9.2</td>
       <td>8.6</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -243,7 +243,7 @@
       <td>€0 - €95K</td>
       <td>8.1</td>
       <td>8.3</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -259,7 +259,7 @@
       <td>€24K - €40K</td>
       <td>8.1</td>
       <td>9.1</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -275,7 +275,7 @@
       <td>€45K - €95K</td>
       <td>9.5</td>
       <td>10.2</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -291,7 +291,7 @@
       <td>€500 - €5K</td>
       <td>8.3</td>
       <td>8.6</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -307,7 +307,7 @@
       <td>€0 - €5K</td>
       <td>6.8</td>
       <td>7.6</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -323,7 +323,7 @@
       <td>€7K - €14K</td>
       <td>7.8</td>
       <td>8.3</td>
-      <td>-</td>
+      <td>0</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -336,7 +336,7 @@
         $(document).ready( function () {
             $('#table').DataTable({
                 paging: false,
-                order: [[12, 'desc']],
+                order: [[1, 'desc']],
                 // scrollY: 400,
             });
         });
