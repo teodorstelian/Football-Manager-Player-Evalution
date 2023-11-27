@@ -3,12 +3,13 @@ import re
 import pandas as pd
 
 from positions import calculate_value
-from settings import INPUT_FILE, OUTPUT_FILE
+from settings import INPUT_FILE, OUTPUT_GENERAL_FILE, OUTPUT_SETPIECES_FILE
 
 
 def main():
     input_html = INPUT_FILE
-    output_html = OUTPUT_FILE
+    output_general_html = OUTPUT_GENERAL_FILE
+    output_setpieces_html = OUTPUT_SETPIECES_FILE
 
     # Read HTML file exported by FM - in this case an example of an output from the squad page
     # This reads as a list, not a dataframe
@@ -30,12 +31,14 @@ def main():
 
     squad_rawdata["First_11"], squad_rawdata["Subs"], squad_rawdata["Total_Apps"] = calculate_appereances(squad_rawdata["Apps"])
     # builds squad dataframe using only columns that will be exported to HTML
-    current_squad = squad_rawdata[['Inf','Name','Age','Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value','gk','lb_rb', 'cb', 'cm_bbm', 'cm_dlp', 'lw', 'rw', 'st_pf', 'st_af', 'Total_Apps', 'Gls',
+    squad_general = squad_rawdata[['Inf','Name','Age','Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value','gk','lb_rb', 'cb', 'cm_bbm', 'cm_dlp', 'lw', 'rw', 'st_pf', 'st_af', 'Total_Apps', 'Gls',
              'Ast', 'Av Rat']]
-    #shortlist = squad_rawdata[['Inf','Name','Age','Position', 'Club','Transfer Value','Nat','Position','Personality','Left Foot', 'Right Foot','Spd','Jum','Str','Work','Height','gk','lb_rb', 'cb', 'cm_bbm', 'cm_dlp', 'lw', 'rw', 'st_pf', 'st_af']]
+
+    squad_set_pieces = squad_rawdata[['Name', 'Age', 'Position', 'Nat', '2nd Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']]
 
     # creates a sortable html export from the dataframe 'squad'
-    generate_output(current_squad, output_html)
+    generate_output(squad_general, output_general_html)
+    generate_output(squad_set_pieces, output_setpieces_html)
 
     # Calculate Position HTML
     for pos in ["gk", "lb", "cb", "rb", "cm", "lw", "rw", "st"]:
