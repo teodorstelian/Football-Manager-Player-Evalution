@@ -1,7 +1,10 @@
 import re
 
 import pandas as pd
+import numpy as np
 
+
+import settings
 from positions import calculate_value
 from settings import *
 
@@ -80,11 +83,52 @@ def calculate_position(position):
     data["First_11"], data["Subs"], data["Total_Apps"] = calculate_appereances(data["Apps"])
 
     data = calculate_value(position, data)
+    data = calculate_league_standard(position, data, settings.CURRENT_NATION)
+
     squad = data[
             ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position,
-             'Total_Apps', 'Gls', 'Ast', 'Av Rat']]
+             'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
     generate_output(squad, f"output/{position}.html")
 
+def calculate_league_standard(position, data, country):
+    divisions = settings.DIVISIONS.get(country, [])
+
+    # Assuming 'position' is a valid index in the Series
+    value_at_position = data[position]
+
+    # Create a mask for the conditions
+    condition_mask = [
+        value_at_position > 18,
+        value_at_position > 16,
+        value_at_position > 14.5,
+        value_at_position > 13,
+        value_at_position > 12,
+        value_at_position > 11,
+        value_at_position > 10,
+        value_at_position > 9,
+        value_at_position > 8,
+        value_at_position <= 8
+    ]
+
+    # Use np.select to choose the corresponding messages based on the conditions
+    msg_options = [
+        "One of the best in the world",
+        f"Leading {divisions[0]} player",
+        f"Great {divisions[0]} player",
+        f"Decent {divisions[0]} player",
+        f"Leading {divisions[1]} player",
+        f"Great {divisions[1]} player",
+        f"Decent {divisions[1]} player",
+        f"Leading {divisions[2]} player",
+        f"Great {divisions[2]} player",
+        f"Decent {divisions[2]} player",
+    ]
+
+    msg = np.select(condition_mask, msg_options)
+
+    # Assign the resulting message to the 'Status' column
+    data["Status"] = msg
+    return data
 
 def generate_output(squad, html):
     generated_html = generate_html(squad)
