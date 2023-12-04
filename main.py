@@ -1,63 +1,57 @@
 import re
-
 import pandas as pd
 import numpy as np
 
-
 import settings
 from positions import calculate_value
-from settings import *
 
+# Constants for file paths and column names
+INPUT_FILE = settings.INPUT_FILE
+OUTPUT_GENERAL_FILE = settings.OUTPUT_GENERAL_FILE
+OUTPUT_SETPIECES_FILE = settings.OUTPUT_SETPIECES_FILE
+ALL_POSITIONS = settings.ALL_POSITIONS
 
 def main():
-    input_html = INPUT_FILE
-    output_general_html = OUTPUT_GENERAL_FILE
-    output_setpieces_html = OUTPUT_SETPIECES_FILE
-    all_positions = ALL_POSITIONS
+    # Read raw data from HTML file
+    squad_rawdata = read_html_data(INPUT_FILE)
 
-    # Read HTML file exported by FM - in this case an example of an output from the squad page
-    # This reads as a list, not a dataframe
-    squad_rawdata = pd.read_html(input_html, header=0, encoding="utf-8", keep_default_na=False)[0]
-
-    # Calculate simple speed and workrate scores
+    # Calculate additional attributes
     squad_rawdata = calculate_extra_attributes(squad_rawdata)
 
-    # calculates per position
-    for pos in all_positions:
-        squad_rawdata = calculate_value(pos, squad_rawdata)
-
-    squad_rawdata["First_11"], squad_rawdata["Subs"], squad_rawdata["Total_Apps"] = calculate_appereances(
+    # Calculate Appearances
+    squad_rawdata["First_11"], squad_rawdata["Subs"], squad_rawdata["Total_Apps"] = calculate_appearances(
         squad_rawdata["Apps"])
-    # builds squad dataframe using only columns that will be exported to HTML
-    squad_general = squad_rawdata[
-        ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'GK', 'LB', 'CB', 'RB', 'CM',
-         'LW', 'RW', 'ST', 'Total_Apps', 'Gls', 'Ast', 'Av Rat']]
 
-    squad_set_pieces = squad_rawdata[
-        ['Name', 'Age', 'Position', 'Nat', '2nd Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']]
-
-    # creates a sortable html export from the dataframe 'squad'
-    generate_output(squad_general, output_general_html)
-    generate_output(squad_set_pieces, output_setpieces_html)
-
-    # Calculate Position HTML
-    for pos in all_positions:
+    # Calculate values and generates html for each position
+    for pos in ALL_POSITIONS:
+        squad_rawdata = calculate_value(pos, squad_rawdata)
         calculate_position(pos)
 
+    # Prepare dataframes for general squad and set pieces
+    squad_general = prepare_squad_dataframe(squad_rawdata)
+    squad_set_pieces = prepare_set_pieces_dataframe(squad_rawdata)
+
+    # Generate HTML and write to files for general squad and set pieces
+    generate_output(squad_general, OUTPUT_GENERAL_FILE)
+    generate_output(squad_set_pieces, OUTPUT_SETPIECES_FILE)
+
+
+def read_html_data(file_path):
+    """Read HTML data from the specified file."""
+    return pd.read_html(file_path, header=0, encoding="utf-8", keep_default_na=False)[0]
 
 def calculate_extra_attributes(data):
+    """Calculate additional attributes."""
     data['Spd'] = (data['Pac'] + data['Acc']) / 2
     data['Work'] = (data['Wor'] + data['Sta']) / 2
     data['SetP'] = (data['Jum'] + data['Bra']) / 2
-
     return data
 
-
-def calculate_appereances(apps):
+def calculate_appearances(apps):
+    """Calculate appearances, first 11, subs, and total apps."""
     first_11, sub, total_apps = [], [], []
     values = list(apps)
 
-    # Process each match and append values to the lists
     for value in values:
         if value == '-':
             first_11.append(0)
@@ -74,29 +68,35 @@ def calculate_appereances(apps):
 
     return first_11, sub, total_apps
 
+def prepare_squad_dataframe(data):
+    """Prepare dataframe for general squad."""
+    columns_to_keep = ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'GK', 'LB', 'CB', 'RB', 'CM', 'LW', 'RW', 'ST', 'Total_Apps', 'Gls', 'Ast', 'Av Rat']
+    return data[columns_to_keep]
+
+def prepare_set_pieces_dataframe(data):
+    """Prepare dataframe for set pieces."""
+    columns_to_keep = ['Name', 'Age', 'Position', 'Nat', '2nd Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']
+    return data[columns_to_keep]
 
 def calculate_position(position):
-    # Calculate Position HTML
-    data = pd.read_html(f"input/{position}.html", header=0, encoding="utf-8", keep_default_na=False)[0]
+    """Calculate values and generate HTML for a specific position."""
+    data = read_html_data(f"input/{position}.html")
     data = calculate_extra_attributes(data)
 
-    data["First_11"], data["Subs"], data["Total_Apps"] = calculate_appereances(data["Apps"])
+    data["First_11"], data["Subs"], data["Total_Apps"] = calculate_appearances(data["Apps"])
 
     data = calculate_value(position, data)
     data = calculate_league_standard(position, data, settings.CURRENT_NATION)
 
-    squad = data[
-            ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position,
-             'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
+    squad = data[['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
     generate_output(squad, f"output/{position}.html")
 
 def calculate_league_standard(position, data, country):
+    """Calculate league standard and assign status."""
     divisions = settings.DIVISIONS.get(country, [])
 
-    # Assuming 'position' is a valid index in the Series
     value_at_position = data[position]
 
-    # Create a mask for the conditions
     condition_mask = [
         value_at_position > 18,
         value_at_position > 16,
@@ -110,7 +110,6 @@ def calculate_league_standard(position, data, country):
         value_at_position <= 8
     ]
 
-    # Use np.select to choose the corresponding messages based on the conditions
     msg_options = [
         "One of the best in the world",
         f"Leading {divisions[0]} player",
@@ -126,20 +125,16 @@ def calculate_league_standard(position, data, country):
 
     msg = np.select(condition_mask, msg_options)
 
-    # Assign the resulting message to the 'Status' column
     data["Status"] = msg
     return data
 
 def generate_output(squad, html):
+    """Generate HTML and write to file."""
     generated_html = generate_html(squad)
     open(html, "w", encoding="utf-8").write(generated_html)
 
-
-# taken from here: https://www.thepythoncode.com/article/convert-pandas-dataframe-to-html-table-python
-# creates a function to make a sortable html export
-
 def generate_html(dataframe: pd.DataFrame):
-    # get the table HTML from the dataframe
+    """Generate HTML with DataTables for the given dataframe."""
     table_html = dataframe.to_html(table_id="table", index=False)
     return f"""
     <html>
@@ -155,14 +150,12 @@ def generate_html(dataframe: pd.DataFrame):
             $('#table').DataTable({{
                 paging: false,
                 order: [[1, 'desc']],
-                // scrollY: 400,
             }});
         }});
     </script>
     </body>
     </html>
     """
-
 
 if __name__ == "__main__":
     main()
