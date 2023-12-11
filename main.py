@@ -7,9 +7,10 @@ from positions import calculate_value
 
 # Constants for file paths and column names
 INPUT_FILE = settings.INPUT_FILE
-OUTPUT_GENERAL_FILE = settings.OUTPUT_GENERAL_FILE
-OUTPUT_SETPIECES_FILE = settings.OUTPUT_SETPIECES_FILE
-ALL_POSITIONS = settings.ALL_POSITIONS
+OUTPUT_FILE = settings.OUTPUT_FILE
+ALL_POSITIONS = settings.POSITIONS
+GENERAL_ATTRIBUTES = settings.ATTRIB_TO_KEEP_GENERAL
+SET_PIECES_ATTRIBUTES = settings.ATTRIB_TO_KEEP_SET_PIECES
 
 def main():
     # Read raw data from HTML file
@@ -22,19 +23,18 @@ def main():
     squad_rawdata["First_11"], squad_rawdata["Subs"], squad_rawdata["Total_Apps"] = calculate_appearances(
         squad_rawdata["Apps"])
 
+    position_tables = {}
     # Calculate values and generates html for each position
     for pos in ALL_POSITIONS:
         squad_rawdata = calculate_value(pos, squad_rawdata)
-        calculate_position(pos)
+        position_tables[pos] = calculate_position(pos)
 
     # Prepare dataframes for general squad and set pieces
-    squad_general = prepare_squad_dataframe(squad_rawdata)
-    squad_set_pieces = prepare_set_pieces_dataframe(squad_rawdata)
+    squad_general = squad_rawdata[GENERAL_ATTRIBUTES]
+    squad_set_pieces = squad_rawdata[SET_PIECES_ATTRIBUTES]
 
-    # Generate HTML and write to files for general squad and set pieces
-    generate_output(squad_general, OUTPUT_GENERAL_FILE)
-    generate_output(squad_set_pieces, OUTPUT_SETPIECES_FILE)
-
+    # Generate HTML and write to a file containing multiple tables
+    generate_html(squad_general, squad_set_pieces, position_tables, OUTPUT_FILE)
 
 def read_html_data(file_path):
     """Read HTML data from the specified file."""
@@ -68,15 +68,6 @@ def calculate_appearances(apps):
 
     return first_11, sub, total_apps
 
-def prepare_squad_dataframe(data):
-    """Prepare dataframe for general squad."""
-    columns_to_keep = ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'GK', 'LB', 'CB', 'RB', 'CM', 'LW', 'RW', 'ST', 'Total_Apps', 'Gls', 'Ast', 'Av Rat']
-    return data[columns_to_keep]
-
-def prepare_set_pieces_dataframe(data):
-    """Prepare dataframe for set pieces."""
-    columns_to_keep = ['Name', 'Age', 'Position', 'Nat', '2nd Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']
-    return data[columns_to_keep]
 
 def calculate_position(position):
     """Calculate values and generate HTML for a specific position."""
@@ -88,8 +79,7 @@ def calculate_position(position):
     data = calculate_value(position, data)
     data = calculate_league_standard(position, data, settings.CURRENT_NATION)
 
-    squad = data[['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
-    generate_output(squad, f"output/{position}.html")
+    return data[['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
 
 def calculate_league_standard(position, data, country):
     """Calculate league standard and assign status."""
@@ -102,6 +92,7 @@ def calculate_league_standard(position, data, country):
         value_at_position > 16,
         value_at_position > 14.5,
         value_at_position > 13,
+        value_at_position > 12.5,
         value_at_position > 12,
         value_at_position > 11,
         value_at_position > 10,
@@ -121,6 +112,7 @@ def calculate_league_standard(position, data, country):
         f"Leading {divisions[2]} player",
         f"Great {divisions[2]} player",
         f"Decent {divisions[2]} player",
+        f"{divisions[3]} player"
     ]
 
     msg = np.select(condition_mask, msg_options)
@@ -128,34 +120,59 @@ def calculate_league_standard(position, data, country):
     data["Status"] = msg
     return data
 
-def generate_output(squad, html):
-    """Generate HTML and write to file."""
-    generated_html = generate_html(squad)
-    open(html, "w", encoding="utf-8").write(generated_html)
+def generate_html(squad_general, squad_set_pieces, position_tables, html):
+    """Generate HTML with tabs and DataTables for the given dataframes and position tables."""
+    table_general_html = squad_general.to_html(classes="table", index=False, table_id="table_general")
+    table_set_pieces_html = squad_set_pieces.to_html(classes="table", index=False, table_id="table_set_pieces")
 
-def generate_html(dataframe: pd.DataFrame):
-    """Generate HTML with DataTables for the given dataframe."""
-    table_html = dataframe.to_html(table_id="table", index=False)
-    return f"""
+    position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for pos, table in position_tables.items()}
+
+    generated_html = f"""
     <html>
-    <header>
+    <head>
         <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
-    </header>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    </head>
     <body>
-    {table_html}
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready( function () {{
-            $('#table').DataTable({{
-                paging: false,
-                order: [[1, 'desc']],
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general">General Squad</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#set-pieces">Set Pieces</a>
+            </li>
+            {"".join(f'<li class="nav-item"><a class="nav-link" id="{pos.lower()}-tab" data-toggle="tab" href="#{pos.lower()}">{pos}</a></li>' for pos in ALL_POSITIONS)}
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="general">
+                {table_general_html}
+            </div>
+            <div class="tab-pane fade" id="set-pieces">
+                {table_set_pieces_html}
+            </div>
+            {"".join(f'<div class="tab-pane fade" id="{pos.lower()}">{position_tables_html[pos]}</div>' for pos in ALL_POSITIONS)}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {{
+                $('#table_general').DataTable({{ paging: false, order: [[1, 'desc']] }});
+                $('#table_set_pieces').DataTable({{ paging: false, order: [[1, 'desc']] }});
+                {"".join(f"$('#table_{pos.lower()}').DataTable({{ paging: false, order: [[1, 'desc']] }});" for pos in ALL_POSITIONS)}
+
+                $('#myTabs a').on('shown.bs.tab', function (e) {{
+                    $.fn.dataTable.tables({{ visible: true, api: true }}).columns.adjust();
+                }});
             }});
-        }});
-    </script>
+        </script>
     </body>
     </html>
     """
+    open(html, "w", encoding="utf-8").write(generated_html)
+
 
 if __name__ == "__main__":
     main()
