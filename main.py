@@ -9,8 +9,6 @@ from positions import calculate_value
 INPUT_FILE = settings.INPUT_FILE
 OUTPUT_FILE = settings.OUTPUT_FILE
 ALL_POSITIONS = settings.POSITIONS
-GENERAL_ATTRIBUTES = settings.ATTRIB_TO_KEEP_GENERAL
-SET_PIECES_ATTRIBUTES = settings.ATTRIB_TO_KEEP_SET_PIECES
 
 
 def main():
@@ -31,11 +29,12 @@ def main():
         position_tables[pos] = calculate_position(pos, squad_rawdata)
 
     # Prepare dataframes for general squad and set pieces
-    squad_general = squad_rawdata[GENERAL_ATTRIBUTES]
-    squad_set_pieces = squad_rawdata[SET_PIECES_ATTRIBUTES]
+    squad_general = squad_rawdata[settings.ATTRIB_TO_KEEP_GENERAL]
+    squad_set_pieces = squad_rawdata[settings.ATTRIB_TO_KEEP_SET_PIECES]
+    squad_national_team = squad_rawdata[settings.ATTRIB_TO_KEEP_NATIONAL_TEAM]
 
     # Generate HTML and write to a file containing multiple tables
-    generate_html(squad_general, squad_set_pieces, position_tables, OUTPUT_FILE)
+    generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, OUTPUT_FILE)
 
 
 def read_html_data(file_path):
@@ -95,7 +94,7 @@ def calculate_position(position, data):
     data = data[switch_dict.get(position)]
 
     return data[
-        ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps',
+        ['Inf', 'Name', 'Age', 'Position', 'Nat', 'Transfer Value', 'Club', position, 'Total_Apps',
          'Gls', 'Ast', 'Av Rat', 'Status']]
 
 
@@ -106,17 +105,17 @@ def calculate_league_standard(position, data, country):
     value_at_position = data[position]
 
     condition_mask = [
-        value_at_position > 18,
-        value_at_position > 16,
-        value_at_position > 14.5,
-        value_at_position > 13,
-        value_at_position > 12.5,
-        value_at_position > 12,
-        value_at_position > 11,
-        value_at_position > 10,
-        value_at_position > 9,
-        value_at_position > 8,
-        value_at_position <= 8
+        value_at_position >= 17,
+        value_at_position >= 15.5,
+        value_at_position >= 14,
+        value_at_position >= 13,
+        value_at_position >= 12.5,
+        value_at_position >= 12,
+        value_at_position >= 11,
+        value_at_position >= 10,
+        value_at_position >= 9,
+        value_at_position >= 8,
+        value_at_position < 8
     ]
 
     msg_options = [
@@ -139,11 +138,11 @@ def calculate_league_standard(position, data, country):
     return data
 
 
-def generate_html(squad_general, squad_set_pieces, position_tables, html):
+def generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, html):
     """Generate HTML with tabs and DataTables for the given dataframes and position tables."""
     table_general_html = squad_general.to_html(classes="table", index=False, table_id="table_general")
     table_set_pieces_html = squad_set_pieces.to_html(classes="table", index=False, table_id="table_set_pieces")
-
+    table_national_team_html = squad_national_team.to_html(classes="table", index=False, table_id="table_national_team")
     position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for
                             pos, table in position_tables.items()}
 
@@ -161,6 +160,9 @@ def generate_html(squad_general, squad_set_pieces, position_tables, html):
             <li class="nav-item">
                 <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#set-pieces">Set Pieces</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#national-team">National Team</a>
+            </li>
             {"".join(f'<li class="nav-item"><a class="nav-link" id="{pos.lower()}-tab" data-toggle="tab" href="#{pos.lower()}">{pos}</a></li>' for pos in ALL_POSITIONS)}
         </ul>
 
@@ -170,6 +172,9 @@ def generate_html(squad_general, squad_set_pieces, position_tables, html):
             </div>
             <div class="tab-pane fade" id="set-pieces">
                 {table_set_pieces_html}
+            </div>
+             <div class="tab-pane fade" id="national-team">
+                {table_national_team_html}
             </div>
             {"".join(f'<div class="tab-pane fade" id="{pos.lower()}">{position_tables_html[pos]}</div>' for pos in ALL_POSITIONS)}
         </div>
@@ -181,6 +186,7 @@ def generate_html(squad_general, squad_set_pieces, position_tables, html):
             $(document).ready(function() {{
                 $('#table_general').DataTable({{ paging: false, order: [[1, 'desc']] }});
                 $('#table_set_pieces').DataTable({{ paging: false, order: [[1, 'desc']] }});
+                $('#table_national_team').DataTable({{ paging: false, order: [[1, 'desc']] }});
                 {"".join(f"$('#table_{pos.lower()}').DataTable({{ paging: false, order: [[1, 'desc']] }});" for pos in ALL_POSITIONS)}
 
                 $('#myTabs a').on('shown.bs.tab', function (e) {{
