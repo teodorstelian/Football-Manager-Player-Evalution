@@ -12,6 +12,7 @@ ALL_POSITIONS = settings.POSITIONS
 GENERAL_ATTRIBUTES = settings.ATTRIB_TO_KEEP_GENERAL
 SET_PIECES_ATTRIBUTES = settings.ATTRIB_TO_KEEP_SET_PIECES
 
+
 def main():
     # Read raw data from HTML file
     squad_rawdata = read_html_data(INPUT_FILE)
@@ -27,7 +28,7 @@ def main():
     # Calculate values and generates html for each position
     for pos in ALL_POSITIONS:
         squad_rawdata = calculate_value(pos, squad_rawdata)
-        position_tables[pos] = calculate_position(pos)
+        position_tables[pos] = calculate_position(pos, squad_rawdata)
 
     # Prepare dataframes for general squad and set pieces
     squad_general = squad_rawdata[GENERAL_ATTRIBUTES]
@@ -36,9 +37,11 @@ def main():
     # Generate HTML and write to a file containing multiple tables
     generate_html(squad_general, squad_set_pieces, position_tables, OUTPUT_FILE)
 
+
 def read_html_data(file_path):
     """Read HTML data from the specified file."""
     return pd.read_html(file_path, header=0, encoding="utf-8", keep_default_na=False)[0]
+
 
 def calculate_extra_attributes(data):
     """Calculate additional attributes."""
@@ -46,6 +49,7 @@ def calculate_extra_attributes(data):
     data['Work'] = (data['Wor'] + data['Sta']) / 2
     data['SetP'] = (data['Jum'] + data['Bra']) / 2
     return data
+
 
 def calculate_appearances(apps):
     """Calculate appearances, first 11, subs, and total apps."""
@@ -69,17 +73,31 @@ def calculate_appearances(apps):
     return first_11, sub, total_apps
 
 
-def calculate_position(position):
+def calculate_position(position, data):
     """Calculate values and generate HTML for a specific position."""
-    data = read_html_data(f"input/{position}.html")
-    data = calculate_extra_attributes(data)
 
     data["First_11"], data["Subs"], data["Total_Apps"] = calculate_appearances(data["Apps"])
 
     data = calculate_value(position, data)
     data = calculate_league_standard(position, data, settings.CURRENT_NATION)
 
-    return data[['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Status']]
+    switch_dict = {
+        "GK": data['Position'].str.contains(settings.GK_REGEX),
+        "LB": data['Position'].str.contains(settings.LB_REGEX),
+        "CB": data['Position'].str.contains(settings.CB_REGEX),
+        "RB": data['Position'].str.contains(settings.RB_REGEX),
+        "CM": data['Position'].str.contains(settings.CM_REGEX),
+        "LW": data['Position'].str.contains(settings.LW_REGEX),
+        "RW": data['Position'].str.contains(settings.RW_REGEX),
+        "ST": data['Position'].str.contains(settings.ST_REGEX)
+    }
+
+    data = data[switch_dict.get(position)]
+
+    return data[
+        ['Inf', 'Name', 'Age', 'Position', 'Height', 'Nat', '2nd Nat', 'Transfer Value', 'Club', position, 'Total_Apps',
+         'Gls', 'Ast', 'Av Rat', 'Status']]
+
 
 def calculate_league_standard(position, data, country):
     """Calculate league standard and assign status."""
@@ -120,12 +138,14 @@ def calculate_league_standard(position, data, country):
     data["Status"] = msg
     return data
 
+
 def generate_html(squad_general, squad_set_pieces, position_tables, html):
     """Generate HTML with tabs and DataTables for the given dataframes and position tables."""
     table_general_html = squad_general.to_html(classes="table", index=False, table_id="table_general")
     table_set_pieces_html = squad_set_pieces.to_html(classes="table", index=False, table_id="table_set_pieces")
 
-    position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for pos, table in position_tables.items()}
+    position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for
+                            pos, table in position_tables.items()}
 
     generated_html = f"""
     <html>
