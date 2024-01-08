@@ -100,23 +100,12 @@ def calculate_position(position, data):
 
 def calculate_league_standard(position, data, country):
     """Calculate league standard and assign status."""
-    divisions = settings.DIVISIONS.get(country, [])
-
+    divisions = settings.DIVISIONS.get(country, [])[1:]
+    division_diff = settings.DIVISIONS.get(country)[0]
+    division_values = settings.DIVISIONS_VALUES.get(division_diff, [])
     value_at_position = data[position]
 
-    condition_mask = [
-        value_at_position >= 17,
-        value_at_position >= 15.5,
-        value_at_position >= 14,
-        value_at_position >= 13,
-        value_at_position >= 12.5,
-        value_at_position >= 12,
-        value_at_position >= 11,
-        value_at_position >= 10,
-        value_at_position >= 9,
-        value_at_position >= 8,
-        value_at_position < 8
-    ]
+    condition_mask = [value_at_position >= threshold for threshold in division_values]
 
     msg_options = [
         "One of the best in the world",
