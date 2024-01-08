@@ -47,6 +47,18 @@ def calculate_extra_attributes(data):
     data['Spd'] = (data['Pac'] + data['Acc']) / 2
     data['Work'] = (data['Wor'] + data['Sta']) / 2
     data['SetP'] = (data['Jum'] + data['Bra']) / 2
+
+    # Apply split and convert 'Transfer Value' for each row
+    def process_transfer_value(value):
+        value_split = value.split(" - ")
+        min_value = float(value_split[0].replace('€', '').replace('M', '00K').replace('K', '').replace(',','')) / 1000
+        max_value = float(value_split[1].replace('€', '').replace('M', '00K').replace('K', '').replace(',','')) / 1000
+        avg_value = (min_value + max_value) / 2
+        avg_value_str = f"€{avg_value:.2f}M"
+        return avg_value_str
+
+    data['Transfer Value'] = data['Transfer Value'].apply(process_transfer_value)
+
     return data
 
 
@@ -79,6 +91,17 @@ def calculate_position(position, data):
 
     data = calculate_value(position, data)
     data = calculate_league_standard(position, data, settings.CURRENT_NATION)
+
+    # # Use .apply to split each element of the 'Position' column
+    # value_split = data["Position"].apply(lambda x: x.split(", "))
+    #
+    # # Create a DataFrame from the split values
+    # split_df = pd.DataFrame(value_split.tolist(), columns=[f'Position{i + 1}' for i in range(value_split.apply(len).max())])
+    # # Replace missing values with "No other position"
+    # split_df.replace({None: "No other position"}, inplace=True)
+    #
+    # # Concatenate the new DataFrame with the original DataFrame
+    # data = pd.concat([data, split_df], axis=1)
 
     switch_dict = {
         "GK": data['Position'].str.contains(settings.GK_REGEX),
@@ -173,10 +196,10 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function() {{
-                $('#table_general').DataTable({{ paging: false, order: [[1, 'desc']] }});
-                $('#table_set_pieces').DataTable({{ paging: false, order: [[1, 'desc']] }});
-                $('#table_national_team').DataTable({{ paging: false, order: [[1, 'desc']] }});
-                {"".join(f"$('#table_{pos.lower()}').DataTable({{ paging: false, order: [[1, 'desc']] }});" for pos in ALL_POSITIONS)}
+                $('#table_general').DataTable({{ paging: false, order: [[5, 'desc']] }});
+                $('#table_set_pieces').DataTable({{ paging: false, order: [[5, 'desc']] }});
+                $('#table_national_team').DataTable({{ paging: false, order: [[6, 'desc']] }});
+                {"".join(f"$('#table_{pos.lower()}').DataTable({{ paging: false, order: [[7, 'desc']] }});" for pos in ALL_POSITIONS)}
 
                 $('#myTabs a').on('shown.bs.tab', function (e) {{
                     $.fn.dataTable.tables({{ visible: true, api: true }}).columns.adjust();
