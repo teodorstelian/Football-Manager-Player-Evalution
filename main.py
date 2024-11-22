@@ -50,16 +50,32 @@ def calculate_extra_attributes(data):
 
     # Apply split and convert 'Transfer Value' for each row
     def process_transfer_value(value):
-        value_split = value.split(" - ")
-        min_value = float(value_split[0].replace('€', '').replace('M', '00K').replace('K', '').replace(',','')) / 1000
-        max_value = float(value_split[1].replace('€', '').replace('M', '00K').replace('K', '').replace(',','')) / 1000
-        avg_value = (min_value + max_value) / 2
-        avg_value_str = f"€{avg_value:.2f}M"
+        if "-" in value:
+            value_split = value.split(" - ")
+            min_value, max_value = value_split[0], value_split[1]
+            min_value = process_units(min_value)
+            max_value = process_units(max_value)
+            avg_value = (float(min_value) + float(max_value)) / 2
+            avg_value_str = f"€{avg_value:.2f}M"
+        else:
+            new_value = process_units(value)
+            avg_value_str = f"€{float(new_value):.2f}M"
         return avg_value_str
 
     data['Transfer Value'] = data['Transfer Value'].apply(process_transfer_value)
 
     return data
+
+
+def process_units(value):
+    if 'K' in value:
+        new_value = value.replace(',', '.').replace('€', '').replace('K', '')
+        new_value = float(new_value) / 1000
+    elif 'M' in value:
+        new_value = value.replace(',', '.').replace('€', '').replace('M', '')
+    else:
+        new_value = float(value.replace('€', '')) / 1000000
+    return new_value
 
 
 def calculate_appearances(apps):
@@ -91,6 +107,7 @@ def calculate_position(position, data):
 
     data = calculate_value(position, data)
     data = calculate_league_standard(position, data, settings.CURRENT_NATION)
+    data = calculate_european_standard(position, data)
 
     # # Use .apply to split each element of the 'Position' column
     # value_split = data["Position"].apply(lambda x: x.split(", "))
@@ -118,11 +135,11 @@ def calculate_position(position, data):
 
     return data[
         ['Inf', 'Name', 'Age', 'Position', 'Nat', 'Transfer Value', 'Club', position, 'Total_Apps',
-         'Gls', 'Ast', 'Av Rat', 'Status']]
+         'Gls', 'Ast', 'Av Rat', 'League Status', 'European Status']]
 
 
 def calculate_league_standard(position, data, country):
-    """Calculate league standard and assign status."""
+    """Calculate league standard and assign league status."""
     divisions = settings.DIVISIONS.get(country, [])[1:]
     division_diff = settings.DIVISIONS.get(country)[0]
     division_values = settings.DIVISIONS_VALUES.get(division_diff, [])
@@ -146,8 +163,37 @@ def calculate_league_standard(position, data, country):
 
     msg = np.select(condition_mask, msg_options)
 
-    data["Status"] = msg
+    data["League Status"] = msg
     return data
+
+
+def calculate_european_standard(position, data):
+    """Calculate league standard and assign league status."""
+    divisions = settings.EUROPEAN_DIVISIONS
+    division_values = settings.EUROPEAN_VALUES
+    value_at_position = data[position]
+
+    condition_mask = [value_at_position >= threshold for threshold in division_values]
+
+    msg_options = [
+        "One of the best in the world",
+        f"Leading {divisions[0]} player",
+        f"Great {divisions[0]} player",
+        f"Decent {divisions[0]} player",
+        f"Leading {divisions[1]} player",
+        f"Great {divisions[1]} player",
+        f"Decent {divisions[1]} player",
+        f"Leading {divisions[2]} player",
+        f"Great {divisions[2]} player",
+        f"Decent {divisions[2]} player",
+        f"Average {divisions[3]} player"
+    ]
+
+    msg = np.select(condition_mask, msg_options)
+
+    data["European Status"] = msg
+    return data
+
 
 
 def generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, html):
@@ -173,7 +219,7 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
                 <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#set-pieces">Set Pieces</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#national-team">National Team</a>
+                <a class="nav-link" id="national-team-tab" data-toggle="tab" href="#national-team">National Team</a>
             </li>
             {"".join(f'<li class="nav-item"><a class="nav-link" id="{pos.lower()}-tab" data-toggle="tab" href="#{pos.lower()}">{pos}</a></li>' for pos in ALL_POSITIONS)}
         </ul>
