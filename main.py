@@ -1,19 +1,27 @@
 import re
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 import settings
 from positions import calculate_value
 
-# Constants for file paths and column names
-INPUT_FILE = settings.INPUT_FILE
-OUTPUT_FILE = settings.OUTPUT_FILE
+
 ALL_POSITIONS = settings.POSITIONS
 
 
 def main():
+
+    input_folder = Path(__file__).parent / settings.INPUT_FOLDER
+    output_folder = Path(__file__).parent / settings.OUTPUT_FOLDER
+
+    for input_file in input_folder.glob("*.html"):
+        output_file = output_folder / input_file.name
+        run_evaluation(input_file, output_file)
+
+def run_evaluation(input_file, output_file):
     # Read raw data from HTML file
-    squad_rawdata = read_html_data(INPUT_FILE)
+    squad_rawdata = read_html_data(input_file)
 
     # Calculate additional attributes
     squad_rawdata = calculate_extra_attributes(squad_rawdata)
@@ -34,7 +42,7 @@ def main():
     squad_national_team = squad_rawdata[settings.ATTRIB_TO_KEEP_NATIONAL_TEAM]
 
     # Generate HTML and write to a file containing multiple tables
-    generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, OUTPUT_FILE)
+    generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, output_file)
 
 
 def read_html_data(file_path):

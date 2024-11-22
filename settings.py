@@ -1,5 +1,5 @@
-INPUT_FILE = "input.html"
-OUTPUT_FILE = "output.html"
+INPUT_FOLDER = "input"
+OUTPUT_FOLDER = "output"
 
 CURRENT_NATION = "ROM"
 
