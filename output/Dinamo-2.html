@@ -1,0 +1,1954 @@
+
+    <html>
+    <head>
+        <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general">General Squad</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="set-pieces-tab" data-toggle="tab" href="#set-pieces">Set Pieces</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="national-team-tab" data-toggle="tab" href="#national-team">National Team</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" id="gk-tab" data-toggle="tab" href="#gk">GK</a></li><li class="nav-item"><a class="nav-link" id="lb-tab" data-toggle="tab" href="#lb">LB</a></li><li class="nav-item"><a class="nav-link" id="rb-tab" data-toggle="tab" href="#rb">RB</a></li><li class="nav-item"><a class="nav-link" id="cb-tab" data-toggle="tab" href="#cb">CB</a></li><li class="nav-item"><a class="nav-link" id="cm-tab" data-toggle="tab" href="#cm">CM</a></li><li class="nav-item"><a class="nav-link" id="lw-tab" data-toggle="tab" href="#lw">LW</a></li><li class="nav-item"><a class="nav-link" id="rw-tab" data-toggle="tab" href="#rw">RW</a></li><li class="nav-item"><a class="nav-link" id="st-tab" data-toggle="tab" href="#st">ST</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="general">
+                <table border="1" class="dataframe table" id="table_general">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>GK</th>
+      <th>LB</th>
+      <th>CB</th>
+      <th>RB</th>
+      <th>CM</th>
+      <th>LW</th>
+      <th>RW</th>
+      <th>ST</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Ottó Hindrich</td>
+      <td>25</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€2.85M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.4</td>
+      <td>8.4</td>
+      <td>10.1</td>
+      <td>8.4</td>
+      <td>9.8</td>
+      <td>9.6</td>
+      <td>9.6</td>
+      <td>9.6</td>
+      <td>33</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.86</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Constantin Pop</td>
+      <td>19</td>
+      <td>D (RC)</td>
+      <td>ROU</td>
+      <td>€3.20M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.5</td>
+      <td>12.3</td>
+      <td>13.2</td>
+      <td>12.3</td>
+      <td>12.8</td>
+      <td>11.6</td>
+      <td>11.7</td>
+      <td>12.0</td>
+      <td>28</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6.83</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Silviu Slobozeanu</td>
+      <td>17</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€2.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.7</td>
+      <td>10.6</td>
+      <td>11.0</td>
+      <td>10.6</td>
+      <td>10.5</td>
+      <td>9.7</td>
+      <td>9.8</td>
+      <td>9.7</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.73</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Daniel Vlad</td>
+      <td>18</td>
+      <td>D (C), DM</td>
+      <td>ROU</td>
+      <td>€3.30M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.9</td>
+      <td>12.1</td>
+      <td>12.6</td>
+      <td>12.1</td>
+      <td>12.1</td>
+      <td>11.4</td>
+      <td>11.5</td>
+      <td>10.9</td>
+      <td>27</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6.87</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Costin Amzăr</td>
+      <td>24</td>
+      <td>D/WB/AM (L)</td>
+      <td>ROU</td>
+      <td>€1.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.1</td>
+      <td>12.2</td>
+      <td>10.8</td>
+      <td>12.2</td>
+      <td>12.0</td>
+      <td>12.2</td>
+      <td>12.6</td>
+      <td>11.8</td>
+      <td>27</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6.71</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alex Gădăleanu</td>
+      <td>19</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€3.65M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.8</td>
+      <td>10.9</td>
+      <td>10.5</td>
+      <td>10.9</td>
+      <td>11.8</td>
+      <td>12.0</td>
+      <td>11.8</td>
+      <td>11.2</td>
+      <td>30</td>
+      <td>3</td>
+      <td>7</td>
+      <td>7.02</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Andrei Mărginean</td>
+      <td>26</td>
+      <td>DM, M (C)</td>
+      <td>ROU</td>
+      <td>€6.20M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>8.5</td>
+      <td>12.6</td>
+      <td>12.8</td>
+      <td>12.6</td>
+      <td>13.0</td>
+      <td>12.4</td>
+      <td>12.4</td>
+      <td>12.8</td>
+      <td>25</td>
+      <td>4</td>
+      <td>1</td>
+      <td>7.00</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.2</td>
+      <td>11.5</td>
+      <td>9.7</td>
+      <td>11.5</td>
+      <td>11.6</td>
+      <td>12.3</td>
+      <td>12.6</td>
+      <td>11.6</td>
+      <td>33</td>
+      <td>1</td>
+      <td>11</td>
+      <td>6.92</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td>€5.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.6</td>
+      <td>11.6</td>
+      <td>10.8</td>
+      <td>11.6</td>
+      <td>12.2</td>
+      <td>12.8</td>
+      <td>12.8</td>
+      <td>13.0</td>
+      <td>32</td>
+      <td>9</td>
+      <td>8</td>
+      <td>6.94</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Andrei Radu</td>
+      <td>19</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€0.14M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.8</td>
+      <td>9.9</td>
+      <td>9.0</td>
+      <td>9.9</td>
+      <td>11.0</td>
+      <td>11.1</td>
+      <td>11.3</td>
+      <td>12.6</td>
+      <td>23</td>
+      <td>9</td>
+      <td>1</td>
+      <td>6.90</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Milan Mitrov</td>
+      <td>19</td>
+      <td>AM (LC), ST (C)</td>
+      <td>ROU</td>
+      <td>€3.35M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.9</td>
+      <td>10.9</td>
+      <td>10.1</td>
+      <td>10.9</td>
+      <td>11.6</td>
+      <td>12.3</td>
+      <td>12.7</td>
+      <td>12.2</td>
+      <td>23</td>
+      <td>3</td>
+      <td>5</td>
+      <td>6.78</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Fabian Apostol</td>
+      <td>18</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€0.43M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>9.8</td>
+      <td>5.0</td>
+      <td>5.9</td>
+      <td>5.0</td>
+      <td>5.7</td>
+      <td>5.6</td>
+      <td>5.5</td>
+      <td>5.1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.10</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Darius Manolache</td>
+      <td>17</td>
+      <td>D (R)</td>
+      <td>ROU</td>
+      <td>€4.65M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.2</td>
+      <td>10.6</td>
+      <td>11.4</td>
+      <td>10.6</td>
+      <td>10.0</td>
+      <td>9.8</td>
+      <td>10.0</td>
+      <td>10.1</td>
+      <td>23</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6.82</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Bogdan Ciurlă</td>
+      <td>18</td>
+      <td>AM (RL)</td>
+      <td>ROU</td>
+      <td>€2.60M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.5</td>
+      <td>10.6</td>
+      <td>9.4</td>
+      <td>10.6</td>
+      <td>11.0</td>
+      <td>11.6</td>
+      <td>12.0</td>
+      <td>11.2</td>
+      <td>18</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.61</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Stanislav Lucescu</td>
+      <td>19</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€0.33M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.2</td>
+      <td>9.3</td>
+      <td>8.9</td>
+      <td>9.3</td>
+      <td>10.6</td>
+      <td>10.8</td>
+      <td>10.8</td>
+      <td>11.0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>George Tenea</td>
+      <td>17</td>
+      <td>D (L)</td>
+      <td>ROU</td>
+      <td>€0.58M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.3</td>
+      <td>10.3</td>
+      <td>9.1</td>
+      <td>10.3</td>
+      <td>10.2</td>
+      <td>9.2</td>
+      <td>9.6</td>
+      <td>8.8</td>
+      <td>24</td>
+      <td>0</td>
+      <td>2</td>
+      <td>6.51</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Simone Tararache</td>
+      <td>20</td>
+      <td>M/AM (C)</td>
+      <td>ROU</td>
+      <td>€0.34M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.0</td>
+      <td>9.9</td>
+      <td>10.0</td>
+      <td>9.9</td>
+      <td>11.3</td>
+      <td>11.1</td>
+      <td>11.1</td>
+      <td>10.6</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.60</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alexandru Avram</td>
+      <td>16</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€1.50M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.9</td>
+      <td>9.6</td>
+      <td>8.8</td>
+      <td>9.6</td>
+      <td>10.4</td>
+      <td>10.2</td>
+      <td>10.4</td>
+      <td>11.7</td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Iordan Ciparidis</td>
+      <td>16</td>
+      <td>AM (L)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.2</td>
+      <td>10.0</td>
+      <td>9.1</td>
+      <td>10.0</td>
+      <td>10.4</td>
+      <td>11.1</td>
+      <td>11.1</td>
+      <td>10.4</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.45</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alin Stoian</td>
+      <td>16</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€1.41M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.9</td>
+      <td>8.9</td>
+      <td>8.6</td>
+      <td>8.9</td>
+      <td>9.4</td>
+      <td>9.4</td>
+      <td>9.5</td>
+      <td>9.1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.73</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Eduard Muntean</td>
+      <td>18</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€1.25M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.6</td>
+      <td>10.5</td>
+      <td>9.5</td>
+      <td>10.5</td>
+      <td>11.2</td>
+      <td>11.3</td>
+      <td>11.6</td>
+      <td>12.7</td>
+      <td>13</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6.67</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Antonio Vasiliu</td>
+      <td>17</td>
+      <td>M (RC)</td>
+      <td>ROU</td>
+      <td>€2.35M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.8</td>
+      <td>11.4</td>
+      <td>8.7</td>
+      <td>11.4</td>
+      <td>11.6</td>
+      <td>11.5</td>
+      <td>11.9</td>
+      <td>10.5</td>
+      <td>15</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.75</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>George Puşcaş</td>
+      <td>31</td>
+      <td>AM (L), ST (C)</td>
+      <td>ROU</td>
+      <td>€4.00M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>6.6</td>
+      <td>11.3</td>
+      <td>11.6</td>
+      <td>11.3</td>
+      <td>12.0</td>
+      <td>12.1</td>
+      <td>12.4</td>
+      <td>12.8</td>
+      <td>22</td>
+      <td>23</td>
+      <td>3</td>
+      <td>7.57</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Fernando Turé</td>
+      <td>18</td>
+      <td>ST (C)</td>
+      <td>FRA</td>
+      <td>€15.50M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>7.2</td>
+      <td>11.3</td>
+      <td>11.0</td>
+      <td>11.3</td>
+      <td>12.0</td>
+      <td>12.8</td>
+      <td>13.1</td>
+      <td>13.4</td>
+      <td>27</td>
+      <td>10</td>
+      <td>4</td>
+      <td>7.07</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Claudiu Ruţă</td>
+      <td>16</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€0.85M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>5.7</td>
+      <td>10.0</td>
+      <td>9.5</td>
+      <td>10.0</td>
+      <td>10.2</td>
+      <td>9.6</td>
+      <td>10.0</td>
+      <td>9.4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.50</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+            <div class="tab-pane fade" id="set-pieces">
+                <table border="1" class="dataframe table" id="table_set_pieces">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Fre</th>
+      <th>Pen</th>
+      <th>Cor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Ottó Hindrich</td>
+      <td>25</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€2.85M</td>
+      <td>3</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Constantin Pop</td>
+      <td>19</td>
+      <td>D (RC)</td>
+      <td>ROU</td>
+      <td>€3.20M</td>
+      <td>4</td>
+      <td>8</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Silviu Slobozeanu</td>
+      <td>17</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€2.70M</td>
+      <td>9</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Daniel Vlad</td>
+      <td>18</td>
+      <td>D (C), DM</td>
+      <td>ROU</td>
+      <td>€3.30M</td>
+      <td>4</td>
+      <td>6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Costin Amzăr</td>
+      <td>24</td>
+      <td>D/WB/AM (L)</td>
+      <td>ROU</td>
+      <td>€1.70M</td>
+      <td>6</td>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alex Gădăleanu</td>
+      <td>19</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€3.65M</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Andrei Mărginean</td>
+      <td>26</td>
+      <td>DM, M (C)</td>
+      <td>ROU</td>
+      <td>€6.20M</td>
+      <td>5</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>10</td>
+      <td>11</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td>€5.70M</td>
+      <td>11</td>
+      <td>12</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Andrei Radu</td>
+      <td>19</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€0.14M</td>
+      <td>5</td>
+      <td>6</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Milan Mitrov</td>
+      <td>19</td>
+      <td>AM (LC), ST (C)</td>
+      <td>ROU</td>
+      <td>€3.35M</td>
+      <td>10</td>
+      <td>7</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Fabian Apostol</td>
+      <td>18</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€0.43M</td>
+      <td>5</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Darius Manolache</td>
+      <td>17</td>
+      <td>D (R)</td>
+      <td>ROU</td>
+      <td>€4.65M</td>
+      <td>1</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Bogdan Ciurlă</td>
+      <td>18</td>
+      <td>AM (RL)</td>
+      <td>ROU</td>
+      <td>€2.60M</td>
+      <td>12</td>
+      <td>5</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Stanislav Lucescu</td>
+      <td>19</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€0.33M</td>
+      <td>5</td>
+      <td>7</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>George Tenea</td>
+      <td>17</td>
+      <td>D (L)</td>
+      <td>ROU</td>
+      <td>€0.58M</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Simone Tararache</td>
+      <td>20</td>
+      <td>M/AM (C)</td>
+      <td>ROU</td>
+      <td>€0.34M</td>
+      <td>5</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alexandru Avram</td>
+      <td>16</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€1.50M</td>
+      <td>11</td>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Iordan Ciparidis</td>
+      <td>16</td>
+      <td>AM (L)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>6</td>
+      <td>5</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alin Stoian</td>
+      <td>16</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€1.41M</td>
+      <td>7</td>
+      <td>11</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Eduard Muntean</td>
+      <td>18</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€1.25M</td>
+      <td>1</td>
+      <td>9</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Antonio Vasiliu</td>
+      <td>17</td>
+      <td>M (RC)</td>
+      <td>ROU</td>
+      <td>€2.35M</td>
+      <td>3</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>George Puşcaş</td>
+      <td>31</td>
+      <td>AM (L), ST (C)</td>
+      <td>ROU</td>
+      <td>€4.00M</td>
+      <td>11</td>
+      <td>16</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Fernando Turé</td>
+      <td>18</td>
+      <td>ST (C)</td>
+      <td>FRA</td>
+      <td>€15.50M</td>
+      <td>7</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Claudiu Ruţă</td>
+      <td>16</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€0.85M</td>
+      <td>8</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+             <div class="tab-pane fade" id="national-team">
+                <table border="1" class="dataframe table" id="table_national_team">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>2nd Nat</th>
+      <th>Caps</th>
+      <th>Goals</th>
+      <th>Yth Apps</th>
+      <th>Yth Gls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Ottó Hindrich</td>
+      <td>25</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>HUN</td>
+      <td>0</td>
+      <td>-</td>
+      <td>3</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Constantin Pop</td>
+      <td>19</td>
+      <td>D (RC)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>3</td>
+      <td>-</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Silviu Slobozeanu</td>
+      <td>17</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>3</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Daniel Vlad</td>
+      <td>18</td>
+      <td>D (C), DM</td>
+      <td>ROU</td>
+      <td></td>
+      <td>1</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Costin Amzăr</td>
+      <td>24</td>
+      <td>D/WB/AM (L)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>5</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alex Gădăleanu</td>
+      <td>19</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>1</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Andrei Mărginean</td>
+      <td>26</td>
+      <td>DM, M (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>JOR</td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Andrei Radu</td>
+      <td>19</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Milan Mitrov</td>
+      <td>19</td>
+      <td>AM (LC), ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Fabian Apostol</td>
+      <td>18</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Darius Manolache</td>
+      <td>17</td>
+      <td>D (R)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Bogdan Ciurlă</td>
+      <td>18</td>
+      <td>AM (RL)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Stanislav Lucescu</td>
+      <td>19</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>George Tenea</td>
+      <td>17</td>
+      <td>D (L)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Simone Tararache</td>
+      <td>20</td>
+      <td>M/AM (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alexandru Avram</td>
+      <td>16</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Iordan Ciparidis</td>
+      <td>16</td>
+      <td>AM (L)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alin Stoian</td>
+      <td>16</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Eduard Muntean</td>
+      <td>18</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Antonio Vasiliu</td>
+      <td>17</td>
+      <td>M (RC)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>George Puşcaş</td>
+      <td>31</td>
+      <td>AM (L), ST (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>52</td>
+      <td>13</td>
+      <td>25</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Fernando Turé</td>
+      <td>18</td>
+      <td>ST (C)</td>
+      <td>FRA</td>
+      <td>GNB</td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Claudiu Ruţă</td>
+      <td>16</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td></td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+            <div class="tab-pane fade" id="gk"><table border="1" class="dataframe table" id="table_gk">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>GK</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Ottó Hindrich</td>
+      <td>25</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€2.85M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.4</td>
+      <td>33</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.86</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Fabian Apostol</td>
+      <td>18</td>
+      <td>GK</td>
+      <td>ROU</td>
+      <td>€0.43M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>9.8</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.10</td>
+      <td>Decent Liga 2 player</td>
+      <td>Average Not good for Europe player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="lb"><table border="1" class="dataframe table" id="table_lb">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>LB</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Costin Amzăr</td>
+      <td>24</td>
+      <td>D/WB/AM (L)</td>
+      <td>ROU</td>
+      <td>€1.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.2</td>
+      <td>27</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6.71</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>George Tenea</td>
+      <td>17</td>
+      <td>D (L)</td>
+      <td>ROU</td>
+      <td>€0.58M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>10.3</td>
+      <td>24</td>
+      <td>0</td>
+      <td>2</td>
+      <td>6.51</td>
+      <td>Great Liga 2 player</td>
+      <td>Average Not good for Europe player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="rb"><table border="1" class="dataframe table" id="table_rb">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>RB</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>U21</td>
+      <td>Constantin Pop</td>
+      <td>19</td>
+      <td>D (RC)</td>
+      <td>ROU</td>
+      <td>€3.20M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.3</td>
+      <td>28</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6.83</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Darius Manolache</td>
+      <td>17</td>
+      <td>D (R)</td>
+      <td>ROU</td>
+      <td>€4.65M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>10.6</td>
+      <td>23</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6.82</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="cb"><table border="1" class="dataframe table" id="table_cb">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>CB</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>U21</td>
+      <td>Constantin Pop</td>
+      <td>19</td>
+      <td>D (RC)</td>
+      <td>ROU</td>
+      <td>€3.20M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>13.2</td>
+      <td>28</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6.83</td>
+      <td>Great SuperLiga player</td>
+      <td>Great Europa League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Silviu Slobozeanu</td>
+      <td>17</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€2.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.0</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.73</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Daniel Vlad</td>
+      <td>18</td>
+      <td>D (C), DM</td>
+      <td>ROU</td>
+      <td>€3.30M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.6</td>
+      <td>27</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6.87</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Claudiu Ruţă</td>
+      <td>16</td>
+      <td>D (C)</td>
+      <td>ROU</td>
+      <td>€0.85M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>9.5</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.50</td>
+      <td>Decent Liga 2 player</td>
+      <td>Average Not good for Europe player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="cm"><table border="1" class="dataframe table" id="table_cm">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>CM</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>U21</td>
+      <td>Alex Gădăleanu</td>
+      <td>19</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€3.65M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.8</td>
+      <td>30</td>
+      <td>3</td>
+      <td>7</td>
+      <td>7.02</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Andrei Mărginean</td>
+      <td>26</td>
+      <td>DM, M (C)</td>
+      <td>ROU</td>
+      <td>€6.20M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>13.0</td>
+      <td>25</td>
+      <td>4</td>
+      <td>1</td>
+      <td>7.00</td>
+      <td>Great SuperLiga player</td>
+      <td>Great Europa League player</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.6</td>
+      <td>33</td>
+      <td>1</td>
+      <td>11</td>
+      <td>6.92</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Simone Tararache</td>
+      <td>20</td>
+      <td>M/AM (C)</td>
+      <td>ROU</td>
+      <td>€0.34M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.60</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alin Stoian</td>
+      <td>16</td>
+      <td>M (C)</td>
+      <td>ROU</td>
+      <td>€1.41M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>9.4</td>
+      <td>20</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.73</td>
+      <td>Decent Liga 2 player</td>
+      <td>Average Not good for Europe player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Antonio Vasiliu</td>
+      <td>17</td>
+      <td>M (RC)</td>
+      <td>ROU</td>
+      <td>€2.35M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.6</td>
+      <td>15</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.75</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="lw"><table border="1" class="dataframe table" id="table_lw">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>LW</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Costin Amzăr</td>
+      <td>24</td>
+      <td>D/WB/AM (L)</td>
+      <td>ROU</td>
+      <td>€1.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.2</td>
+      <td>27</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6.71</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.3</td>
+      <td>33</td>
+      <td>1</td>
+      <td>11</td>
+      <td>6.92</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td>€5.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.8</td>
+      <td>32</td>
+      <td>9</td>
+      <td>8</td>
+      <td>6.94</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Milan Mitrov</td>
+      <td>19</td>
+      <td>AM (LC), ST (C)</td>
+      <td>ROU</td>
+      <td>€3.35M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.3</td>
+      <td>23</td>
+      <td>3</td>
+      <td>5</td>
+      <td>6.78</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Bogdan Ciurlă</td>
+      <td>18</td>
+      <td>AM (RL)</td>
+      <td>ROU</td>
+      <td>€2.60M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.6</td>
+      <td>18</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.61</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Iordan Ciparidis</td>
+      <td>16</td>
+      <td>AM (L)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.1</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6.45</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>George Puşcaş</td>
+      <td>31</td>
+      <td>AM (L), ST (C)</td>
+      <td>ROU</td>
+      <td>€4.00M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.1</td>
+      <td>22</td>
+      <td>23</td>
+      <td>3</td>
+      <td>7.57</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="rw"><table border="1" class="dataframe table" id="table_rw">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>RW</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Ahmed Bani</td>
+      <td>25</td>
+      <td>M (LC), AM (RLC)</td>
+      <td>ROU</td>
+      <td>€1.90M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.6</td>
+      <td>33</td>
+      <td>1</td>
+      <td>11</td>
+      <td>6.92</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td>€5.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.8</td>
+      <td>32</td>
+      <td>9</td>
+      <td>8</td>
+      <td>6.94</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Bogdan Ciurlă</td>
+      <td>18</td>
+      <td>AM (RL)</td>
+      <td>ROU</td>
+      <td>€2.60M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.0</td>
+      <td>18</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6.61</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Stanislav Lucescu</td>
+      <td>19</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€0.33M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>10.8</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Eduard Muntean</td>
+      <td>18</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€1.25M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.6</td>
+      <td>13</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6.67</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+  </tbody>
+</table></div><div class="tab-pane fade" id="st"><table border="1" class="dataframe table" id="table_st">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Inf</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Nat</th>
+      <th>Transfer Value</th>
+      <th>Club</th>
+      <th>ST</th>
+      <th>Total_Apps</th>
+      <th>Gls</th>
+      <th>Ast</th>
+      <th>Av Rat</th>
+      <th>League Status</th>
+      <th>European Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HGN</td>
+      <td>Dennis Politic</td>
+      <td>27</td>
+      <td>AM (RLC), ST (C)</td>
+      <td>ROU</td>
+      <td>€5.70M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>13.0</td>
+      <td>32</td>
+      <td>9</td>
+      <td>8</td>
+      <td>6.94</td>
+      <td>Great SuperLiga player</td>
+      <td>Great Europa League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Andrei Radu</td>
+      <td>19</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€0.14M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.6</td>
+      <td>23</td>
+      <td>9</td>
+      <td>1</td>
+      <td>6.90</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Milan Mitrov</td>
+      <td>19</td>
+      <td>AM (LC), ST (C)</td>
+      <td>ROU</td>
+      <td>€3.35M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.2</td>
+      <td>23</td>
+      <td>3</td>
+      <td>5</td>
+      <td>6.78</td>
+      <td>Decent SuperLiga player</td>
+      <td>Leading Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Stanislav Lucescu</td>
+      <td>19</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€0.33M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-</td>
+      <td>Leading Liga 2 player</td>
+      <td>Decent Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Alexandru Avram</td>
+      <td>16</td>
+      <td>ST (C)</td>
+      <td>ROU</td>
+      <td>€1.50M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>11.7</td>
+      <td>0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>Decent SuperLiga player</td>
+      <td>Great Europa Conference League player</td>
+    </tr>
+    <tr>
+      <td>U21</td>
+      <td>Eduard Muntean</td>
+      <td>18</td>
+      <td>AM (R), ST (C)</td>
+      <td>ROU</td>
+      <td>€1.25M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.7</td>
+      <td>13</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6.67</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>George Puşcaş</td>
+      <td>31</td>
+      <td>AM (L), ST (C)</td>
+      <td>ROU</td>
+      <td>€4.00M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>12.8</td>
+      <td>22</td>
+      <td>23</td>
+      <td>3</td>
+      <td>7.57</td>
+      <td>Great SuperLiga player</td>
+      <td>Decent Europa League player</td>
+    </tr>
+    <tr>
+      <td>Inj</td>
+      <td>Fernando Turé</td>
+      <td>18</td>
+      <td>ST (C)</td>
+      <td>FRA</td>
+      <td>€15.50M</td>
+      <td>Dinamo Bucureşti</td>
+      <td>13.4</td>
+      <td>27</td>
+      <td>10</td>
+      <td>4</td>
+      <td>7.07</td>
+      <td>Great SuperLiga player</td>
+      <td>Great Europa League player</td>
+    </tr>
+  </tbody>
+</table></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#table_general').DataTable({ paging: false, order: [[5, 'desc']] });
+                $('#table_set_pieces').DataTable({ paging: false, order: [[5, 'desc']] });
+                $('#table_national_team').DataTable({ paging: false, order: [[6, 'desc']] });
+                $('#table_gk').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_lb').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_rb').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_cb').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_cm').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_lw').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_rw').DataTable({ paging: false, order: [[7, 'desc']] });$('#table_st').DataTable({ paging: false, order: [[7, 'desc']] });
+
+                $('#myTabs a').on('shown.bs.tab', function (e) {
+                    $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

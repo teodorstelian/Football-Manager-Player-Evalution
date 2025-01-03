@@ -30,9 +30,9 @@ ATTRIB_TO_KEEP_NATIONAL_TEAM = ['Inf', 'Name', 'Age', 'Position', 'Nat', '2nd Na
 # Positions
 POSITIONS = ["GK", "LB", "RB", "CB", "CM", "LW", "RW", "ST"]
 GK_REGEX = 'GK'
-LB_REGEX = r'D(?!M)/?[^/]*\(.*L.*\)'
-CB_REGEX = r'D(?!M)/?[^/]*\(.*C.*\)'
-RB_REGEX = r'D(?!M)/?[^/]*\(.*R.*\)'
+LB_REGEX = r'D(?!M)(?:/[^/]*)*\s?\(.*L.*\)'
+CB_REGEX = r'D(?!M)(?:/[^/]*)*\s?\(.*C.*\)'
+RB_REGEX = r'D(?!M)(?:/[^/]*)*\s?\(.*R.*\)'
 CM_REGEX = r'(?<!A)M[^)]*\([^)]*C[^)]*\)'
 LW_REGEX = r'AM(?!M)/?[^/]*\(.*L.*\)'
 RW_REGEX = r'AM(?!M)/?[^/]*\(.*R.*\)'
