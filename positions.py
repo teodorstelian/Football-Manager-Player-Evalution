@@ -23,7 +23,7 @@ def calculate_sweeper_keeper_support(data, name):
             data['Aer'] + data['Fir'] + data['Han'] + data['Pas'] +
             data['TRO'] + data['Dec'] + data['Vis'] + data['Acc'])
     data[name] = (((data['sks_key'] * 5) + (data['sks_green'] * 3) + (
-            data['sks_blue'] * 1)) / 36).round(1)
+            data['sks_blue'] * 1) + data['lfv'] + data['rfv']) / 38).round(1)
 
     return data
 
@@ -39,8 +39,13 @@ def calculate_wing_back_support(data, name):
             data['Fir'] + data['Pas'] + data['Tec'] + data['Ant'] +
             data['Cnt'] + data['Dec'] + data['Pos'] + data['Agi'] +
             data['Bal'])
-    data[name] = (((data['wbs_key'] * 5) + (data['wbs_green'] * 3) + (
-            data['wbs_blue'] * 1)) / 47).round(1)
+
+    if name == "LB":
+        data[name] = (((data['wbs_key'] * 5) + (data['wbs_green'] * 3) + (
+            data['wbs_blue'] * 1) +  data['lfv'] * 5 + data['rfv']) / 53).round(1)
+    elif name == "RB":
+        data[name] = (((data['wbs_key'] * 5) + (data['wbs_green'] * 3) + (
+                data['wbs_blue'] * 1) +  data['rfv'] * 5 + data['lfv']) / 53).round(1)
 
     return data
 
@@ -56,7 +61,7 @@ def calculate_ball_playing_defender_defend(data, name):
             data['Fir'] + data['Tec'] + data['Agg'] + data['Ant'] +
             data['Bra'] + data['Cnt'] + data['Dec'] + data['Vis'])
     data[name] = (((data['bpdd_key'] * 5) + (data['bpdd_green'] * 3) + (
-            data['bpdd_blue'] * 1)) / 46).round(1)
+            data['bpdd_blue'] * 1) + data['lfv'] * 3 + data['rfv'] * 3 ) / 52).round(1)
     return data
 
 
@@ -78,7 +83,7 @@ def calculate_box_to_box_midfielder_support(data, name):
             data['Tec'] + data['Agg'] + data['Ant'] + data['Cmp'] +
             data['Dec'] + data['Pos'] + data['Bal'] + data['Str'])
     data[name] = (((data['b2bs_key'] * 5) + (data['b2bs_green'] * 3) + (
-            data['b2bs_blue'] * 1)) / 44).round(1)
+            data['b2bs_blue'] * 1) +  data['lfv'] * 3 + data['rfv'] * 3 ) / 50).round(1)
     return data
 
 
@@ -92,7 +97,7 @@ def calculate_deep_lying_playmaker_defend(data, name):
     data['dlpd_blue'] = (
             data['Tck'] + data['Ant'] + data['Pos'] + data['Bal'])
     data[name] = (((data['dlpd_key'] * 5) + (data['dlpd_green'] * 3) + (
-            data['dlpd_blue'] * 1)) / 45).round(1)
+            data['dlpd_blue'] * 1) + data['lfv'] * 3 + data['rfv'] * 3) / 51).round(1)
     return data
 
 
@@ -108,7 +113,7 @@ def calculate_inverted_winger_attack(data, name):
             data['Dec'] + data['Fla'] + data['OtB'] + data['Vis'] +
             data['Bal'])
     data[name] = (((data['iwa_key'] * 5) + (data['iwa_green'] * 3) + (
-            data['iwa_blue'] * 1)) / 44).round(1)
+            data['iwa_blue'] * 1) + data['lfv'] * 5 + data['rfv'] ) / 50).round(1)
     return data
 
 
@@ -122,7 +127,8 @@ def calculate_winger_attack(data, name):
             data['Fir'] + data['Pas'] + data['Ant'] + data['Fla'] +
             data['OtB'] + data['Bal'])
     data[name] = (
-            ((data['wa_key'] * 5) + (data['wa_green'] * 3) + (data['wa_blue'] * 1)) / 38).round(1)
+            ((data['wa_key'] * 5) + (data['wa_green'] * 3) + (data['wa_blue'] * 1) +
+             data['lfv'] + data['rfv'] * 5) / 44).round(1)
     return data
 
 
@@ -143,7 +149,7 @@ def calculate_pressing_forward_attack(data, name):
             data['Fir'] + data['Cmp'] + data['Cnt'] + data['Dec'] +
             data['Agi'] + data['Bal'] + data['Str'])
     data[name] = (((data['pfa_key'] * 5) + (data['pfa_green'] * 3) + (
-            data['pfa_blue'] * 1)) / 43).round(1)
+            data['pfa_blue'] * 1) + data['lfv'] * 3 + data['rfv'] * 3) / 49).round(1)
     return data
 
 
@@ -157,5 +163,6 @@ def calculate_advanced_forward_attack(data, name):
             data['Pas'] + data['Ant'] + data['Dec'] + data['Wor'] +
             data['Agi'] + data['Bal'] + data['Sta'])
     data[name] = (((data['afa_key'] * 5) + (data['afa_green'] * 3) + (
-            data['afa_blue'] * 1)) / 37).round(1)
+            data['afa_blue'] * 1) + data['lfv'] * 3 + data['rfv'] * 3) / 43).round(1)
     return data
+

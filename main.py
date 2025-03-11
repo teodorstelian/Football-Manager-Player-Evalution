@@ -26,6 +26,9 @@ def run_evaluation(input_file, output_file):
     # Calculate additional attributes
     squad_rawdata = calculate_extra_attributes(squad_rawdata)
 
+    # Calculate left and right foot attributes
+    squad_rawdata = calculate_left_right_foot_attributes(squad_rawdata)
+
     # Calculate Appearances
     squad_rawdata["First_11"], squad_rawdata["Subs"], squad_rawdata["Total_Apps"] = calculate_appearances(
         squad_rawdata["Apps"])
@@ -74,6 +77,22 @@ def calculate_extra_attributes(data):
 
     return data
 
+def calculate_left_right_foot_attributes(data):
+    data['lfv'] = data['Left Foot'].apply(calc_foot_strength)
+    data['rfv'] = data['Right Foot'].apply(calc_foot_strength)
+
+    return data
+
+def calc_foot_strength(foot):
+    foot_map = {
+        "Very Weak": 1,
+        "Weak": 4,
+        "Fairly Weak": 8,
+        "Fairly Strong": 12,
+        "Strong": 16,
+        "Very Strong": 20
+    }
+    return foot_map.get(foot, 0)
 
 def process_units(value):
     if 'K' in value:
@@ -194,7 +213,7 @@ def calculate_european_standard(position, data):
         f"Leading {divisions[2]} player",
         f"Great {divisions[2]} player",
         f"Decent {divisions[2]} player",
-        f"Average {divisions[3]} player"
+        f"{divisions[3]} player"
     ]
 
     msg = np.select(condition_mask, msg_options)
@@ -202,16 +221,21 @@ def calculate_european_standard(position, data):
     data["European Status"] = msg
     return data
 
-
-
 def generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, html):
     """Generate HTML with tabs and DataTables for the given dataframes and position tables."""
+    # Filter players with high potential
+    squad_high_potential = squad_general[squad_general['PA'] > settings.HIGH_POTENTIAL_THRESHOLD]
+
+    # Generate HTML tables
     table_general_html = squad_general.to_html(classes="table", index=False, table_id="table_general")
     table_set_pieces_html = squad_set_pieces.to_html(classes="table", index=False, table_id="table_set_pieces")
     table_national_team_html = squad_national_team.to_html(classes="table", index=False, table_id="table_national_team")
+    table_high_potential_html = squad_high_potential.to_html(classes="table", index=False,
+                                                             table_id="table_high_potential")
     position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for
                             pos, table in position_tables.items()}
 
+    # Generate HTML structure with tabs
     generated_html = f"""
     <html>
     <head>
@@ -229,6 +253,9 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
             <li class="nav-item">
                 <a class="nav-link" id="national-team-tab" data-toggle="tab" href="#national-team">National Team</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="high-potential-tab" data-toggle="tab" href="#high-potential">High Potential</a>
+            </li>
             {"".join(f'<li class="nav-item"><a class="nav-link" id="{pos.lower()}-tab" data-toggle="tab" href="#{pos.lower()}">{pos}</a></li>' for pos in ALL_POSITIONS)}
         </ul>
 
@@ -242,6 +269,9 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
              <div class="tab-pane fade" id="national-team">
                 {table_national_team_html}
             </div>
+            <div class="tab-pane fade" id="high-potential">
+                {table_high_potential_html}
+            </div>
             {"".join(f'<div class="tab-pane fade" id="{pos.lower()}">{position_tables_html[pos]}</div>' for pos in ALL_POSITIONS)}
         </div>
 
@@ -253,6 +283,7 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
                 $('#table_general').DataTable({{ paging: false, order: [[5, 'desc']] }});
                 $('#table_set_pieces').DataTable({{ paging: false, order: [[5, 'desc']] }});
                 $('#table_national_team').DataTable({{ paging: false, order: [[6, 'desc']] }});
+                $('#table_high_potential').DataTable({{ paging: false, order: [[5, 'desc']] }});
                 {"".join(f"$('#table_{pos.lower()}').DataTable({{ paging: false, order: [[7, 'desc']] }});" for pos in ALL_POSITIONS)}
 
                 $('#myTabs a').on('shown.bs.tab', function (e) {{
