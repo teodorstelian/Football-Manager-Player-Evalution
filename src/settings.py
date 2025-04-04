@@ -1,7 +1,7 @@
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
-CURRENT_NATION = "ENG"
+CURRENT_NATION = "ROM"
 
 # Divisions of the countries, starting with reputation
 DIVISIONS = {
@@ -27,7 +27,8 @@ ATTRIB_TO_KEEP_GENERAL = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', 'Transf
 ATTRIB_TO_KEEP_SET_PIECES = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']
 ATTRIB_TO_KEEP_NATIONAL_TEAM = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', '2nd Nat', 'Caps', 'Goals', 'Yth Apps', 'Yth Gls']
 
-HIGH_POTENTIAL_THRESHOLD = 150
+WONDERKID_POTENTIAL_THRESHOLD = 140
+WONDERKID_AGE_THRESHOLD = 23
 
 # Positions
 POSITIONS = ["GK", "LB", "RB", "CB", "CM", "LW", "RW", "ST"]
