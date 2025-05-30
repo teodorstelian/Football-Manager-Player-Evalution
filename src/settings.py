@@ -1,14 +1,15 @@
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
-CURRENT_NATION = "ROM"
+CURRENT_NATION = "BEL"
 
 # Divisions of the countries, starting with reputation
 DIVISIONS = {
     'ENG': ['1', 'Premier League', 'Championship', 'League One', 'League Two'],
     'ITA': ['1', 'Serie A', 'Serie B', 'Serie C', 'Serie D'],
-    'FRA': ['1', 'Ligue 1', 'Ligue 2', 'Ligue 3'],
+    'FRA': ['1', 'Ligue 1', 'Ligue 2', 'Championnat National', 'Championnat National 2'],
     'ROM': ['3', 'SuperLiga', 'Liga 2', 'Liga 3', 'Liga 4'],
+    'BEL': ['2', 'Belgian Pro League', 'Challenger Pro League', 'Belgian Division 1', 'Belgian Division 2'],
 }
 DIVISIONS_VALUES ={
     '1': [17, 15.5, 14, 13, 12.5, 12, 11, 10, 9, 8, 0],

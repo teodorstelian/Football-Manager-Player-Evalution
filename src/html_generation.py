@@ -1,3 +1,5 @@
+import pandas as pd
+
 from src import settings
 
 ALL_POSITIONS = settings.POSITIONS
@@ -10,11 +12,24 @@ def generate_html(squad_general, squad_set_pieces, squad_national_team, position
         (squad_general['PA'] >= settings.WONDERKID_POTENTIAL_THRESHOLD) &
         (squad_general['Age'] <= settings.WONDERKID_AGE_THRESHOLD)
         ]
+
+    # Convert 'Caps' and 'Youth Apps' to numeric, coercing errors to NaN
+    squad_national_team['Caps'] = pd.to_numeric(squad_national_team['Caps'], errors='coerce')
+    squad_national_team['Yth Apps'] = pd.to_numeric(squad_national_team['Yth Apps'], errors='coerce')
+
+    # Fix the NaN errors
+    squad_national_team['Yth Apps'] = squad_national_team['Yth Apps'].fillna(0).astype(int)
+
+    # Filter for national team to include only players with Caps > 0 or Youth Apps > 0
+    squad_national_team_filtered = squad_national_team[
+        (squad_national_team['Caps'] > 0) | (squad_national_team['Yth Apps'] > 0)
+    ]
+
     # Generate HTML tables
     table_general_html = squad_general.to_html(classes="table", index=False, table_id="table_general")
     table_wonderkids_html = squad_high_potential.to_html(classes="table", index=False, table_id="table_wonderkids")
     table_set_pieces_html = squad_set_pieces.to_html(classes="table", index=False, table_id="table_set_pieces")
-    table_national_team_html = squad_national_team.to_html(classes="table", index=False, table_id="table_national_team")
+    table_national_team_html = squad_national_team_filtered.to_html(classes="table", index=False, table_id="table_national_team")
     position_tables_html = {pos: table.to_html(classes="table", index=False, table_id=f"table_{pos.lower()}") for
                             pos, table in position_tables.items()}
 
