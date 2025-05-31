@@ -45,6 +45,7 @@ def run_evaluation(input_file, output_file):
     squad_general = squad_rawdata[settings.ATTRIB_TO_KEEP_GENERAL]
     squad_set_pieces = squad_rawdata[settings.ATTRIB_TO_KEEP_SET_PIECES]
     squad_national_team = squad_rawdata[settings.ATTRIB_TO_KEEP_NATIONAL_TEAM]
+    squad_versatility = squad_rawdata[settings.ATTRIB_TO_KEEP_VERSATILITY]
 
     # Generate HTML and write to a file containing multiple tables
-    generate_html(squad_general, squad_set_pieces, squad_national_team, position_tables, output_file)
+    generate_html(squad_general, squad_set_pieces, squad_national_team, squad_versatility, position_tables, output_file)
