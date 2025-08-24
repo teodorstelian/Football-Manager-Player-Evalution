@@ -1,7 +1,7 @@
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
-CURRENT_NATION = "BEL"
+CURRENT_NATION = "ENG"
 
 # Divisions of the countries, starting with reputation
 DIVISIONS = {
@@ -24,7 +24,7 @@ EUROPEAN_DIVISIONS = [
 EUROPEAN_VALUES = [17, 16, 15, 14, 13.5, 13, 12.5, 12, 11.5, 10.5, 0]
 
 ATTRIB_TO_KEEP_GENERAL = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Vers', 'Nat', 'Transfer Value', 'Club', 'GK', 'LB',
-                          'CB', 'RB', 'CM', 'LW', 'RW', 'ST', 'Total_Apps', 'Gls', 'Ast', 'Av Rat']
+                          'CB', 'RB', 'CM', 'LW', 'RW', 'ST', 'Best', 'Total_Apps', 'Gls', 'Ast', 'Av Rat']
 ATTRIB_TO_KEEP_SET_PIECES = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', 'Transfer Value', 'Fre', 'Pen', 'Cor']
 ATTRIB_TO_KEEP_NATIONAL_TEAM = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', '2nd Nat', 'Caps', 'Goals', 'Yth Apps', 'Yth Gls']
 ATTRIB_TO_KEEP_VERSATILITY = ['Inf', 'Name', 'Age', 'PA', 'Position', 'Nat', 'Transfer Value', 'Total_Apps', 'Gls', 'Ast', 'Av Rat', 'Vers']

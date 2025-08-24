@@ -16,11 +16,14 @@ def calculate_extra_attributes(data):
     def process_transfer_value(value):
         if "-" in value:
             value_split = value.split(" - ")
-            min_value, max_value = value_split[0], value_split[1]
-            min_value = process_units(min_value)
-            max_value = process_units(max_value)
-            avg_value = (float(min_value) + float(max_value)) / 2
-            avg_value_str = f"€{avg_value:.2f}M"
+            if len(value_split) > 1:
+                min_value, max_value = value_split[0], value_split[1]
+                min_value = process_units(min_value)
+                max_value = process_units(max_value)
+                avg_value = (float(min_value) + float(max_value)) / 2
+                avg_value_str = f"€{avg_value:.2f}M"
+            else:
+                avg_value_str = "€0.00M"
         else:
             new_value = process_units(value)
             avg_value_str = f"€{float(new_value):.2f}M"

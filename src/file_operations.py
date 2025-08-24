@@ -41,6 +41,13 @@ def run_evaluation(input_file, output_file):
         squad_rawdata = calculate_value(pos, squad_rawdata)
         position_tables[pos] = calculate_position(pos, squad_rawdata)
 
+    pos_value_columns = [col for col in squad_rawdata.columns if col in settings.POSITIONS]
+
+    # Find best position & corresponding value
+    squad_rawdata["Best"] = squad_rawdata[pos_value_columns].apply(
+        lambda row: f"{row.idxmax()} ({row.max()})", axis=1
+    )
+
     # Prepare dataframes for general squad and set pieces
     squad_general = squad_rawdata[settings.ATTRIB_TO_KEEP_GENERAL]
     squad_set_pieces = squad_rawdata[settings.ATTRIB_TO_KEEP_SET_PIECES]
