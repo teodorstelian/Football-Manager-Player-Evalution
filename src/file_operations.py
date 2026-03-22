@@ -3,6 +3,7 @@ from pathlib import Path
 
 from positions import calculate_value
 from src import settings
+from src.advanced_scoring import add_advanced_category_scores, build_advanced_tables
 from src.html_generation import generate_html
 from src.utils import calculate_extra_attributes, calculate_left_right_foot_attributes, calculate_appearances, \
     calculate_position
@@ -17,6 +18,21 @@ def remove_input_file(input_file):
     except Exception as e:
         print(f"Error deleting file {input_file}: {e}")
 
+def convert_numeric_columns(df):
+
+    for col in settings.numeric_columns:
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.strip()
+
+            if col == "Dist/90":
+                df[col] = df[col].str.replace("km", "", regex=False)
+
+            df[col] = df[col].replace({"": None, "-": 0, "N/A": 0})
+
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    return df
+
 def read_html_data(file_path):
     """Read HTML data from the specified file."""
     return pd.read_html(file_path, header=0, encoding="utf-8", keep_default_na=False)[0]
@@ -24,6 +40,9 @@ def read_html_data(file_path):
 def run_evaluation(input_file, output_file):
     # Read raw data from HTML file
     squad_rawdata = read_html_data(input_file)
+
+    # Convert numeric columns early so sorting/calculations work correctly
+    squad_rawdata = convert_numeric_columns(squad_rawdata)
 
     # Calculate additional attributes
     squad_rawdata = calculate_extra_attributes(squad_rawdata)
@@ -48,6 +67,10 @@ def run_evaluation(input_file, output_file):
         lambda row: f"{row.idxmax()} ({row.max()})", axis=1
     )
 
+    # Advanced category scoring
+    squad_rawdata = add_advanced_category_scores(squad_rawdata)
+    advanced_tables = build_advanced_tables(squad_rawdata)
+
     # Prepare dataframes for general squad and set pieces
     squad_general = squad_rawdata[settings.ATTRIB_TO_KEEP_GENERAL]
     squad_set_pieces = squad_rawdata[settings.ATTRIB_TO_KEEP_SET_PIECES]
@@ -55,4 +78,12 @@ def run_evaluation(input_file, output_file):
     squad_versatility = squad_rawdata[settings.ATTRIB_TO_KEEP_VERSATILITY]
 
     # Generate HTML and write to a file containing multiple tables
-    generate_html(squad_general, squad_set_pieces, squad_national_team, squad_versatility, position_tables, output_file)
+    generate_html(
+        squad_general=squad_general,
+        squad_set_pieces=squad_set_pieces,
+        squad_national_team=squad_national_team,
+        squad_versatility=squad_versatility,
+        position_tables=position_tables,
+        advanced_tables=advanced_tables,
+        html=output_file,
+    )

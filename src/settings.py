@@ -1,12 +1,13 @@
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
-CURRENT_NATION = "ENG"
+CURRENT_NATION = "GER"
 
 # Divisions of the countries, starting with reputation
 DIVISIONS = {
     'ENG': ['1', 'Premier League', 'Championship', 'League One', 'League Two'],
     'ITA': ['1', 'Serie A', 'Serie B', 'Serie C', 'Serie D'],
+    'GER': ['1', 'Bundesliga', '2. Bundesliga', '3. Liga', 'Regionalliga'],
     'FRA': ['1', 'Ligue 1', 'Ligue 2', 'Championnat National', 'Championnat National 2'],
     'ROM': ['3', 'SuperLiga', 'Liga 2', 'Liga 3', 'Liga 4'],
     'BEL': ['2', 'Belgian Pro League', 'Challenger Pro League', 'Belgian Division 1', 'Belgian Division 2'],
@@ -43,3 +44,49 @@ CM_REGEX = r'(?<!A)M[^)]*\([^)]*C[^)]*\)'
 LW_REGEX = r'AM(?!M)/?[^/]*\(.*L.*\)'
 RW_REGEX = r'AM(?!M)/?[^/]*\(.*R.*\)'
 ST_REGEX = r'ST[^)]*\([^)]*C[^)]*\)'
+
+numeric_columns = [
+    "Age", "Caps", "Goals", "Yth Apps", "Yth Gls", "Av Rat",
+    "Height", "PA", "Fre", "Cor", "Pen", "Vers",
+    "xG", "xA", "xGP", "xG-OP",
+    "Drb/90", "Ch C/90", "Ps C/90", "Poss Won/90", "Poss Lost/90",
+    "K Ps/90", "Sprints/90", "Dist/90", "Shot/90", "ShT/90",
+    "Int/90", "K Tck/90", "Tck/90", "Clr/90", "Blk/90", "Shts Blckd/90",
+    "Gl Mst", "Mins/Gm", "Gls", "Ast", "Yel", "Red"
+]
+
+ADVANCED_STAT_CATEGORIES = {
+    "Attacking": ["xG", "xG-OP", "Shot/90", "ShT/90", "Gls"],
+    "Creativity": ["xA", "Ch C/90", "K Ps/90", "Ps C/90", "Drb/90", "Ast"],
+    "Defending": ["Int/90", "K Tck/90", "Tck/90", "Clr/90", "Blk/90", "Shts Blckd/90", "Poss Won/90"],
+    "Physical": ["Sprints/90", "Dist/90"],
+    "Discipline": ["Poss Lost/90", "Gl Mst", "Yel", "Red"],
+}
+
+REVERSED_ADVANCED_STATS = {
+    "Poss Lost/90",
+    "Yel",
+    "Red",
+    "Gl Mst"
+}
+
+ADVANCED_SUMMARY_COLUMNS = [
+    "Name",
+    "Age",
+    "Position",
+    "Attacking_Score",
+    "Creativity_Score",
+    "Defending_Score",
+    "Physical_Score",
+    "Discipline_Score",
+    "Advanced_Total_Score",
+    "Av Rat",
+    "Apps",
+]
+
+ADVANCED_BASE_INFO_COLUMNS = [
+    "Name",
+    "Age",
+    "Position",
+    "Apps",
+]
